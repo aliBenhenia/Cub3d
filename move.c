@@ -23,7 +23,7 @@ void	handle_walk_(t_data *info)
 	}
 	map_x = end_x / TILE_SIZE;
 	map_y = end_y / TILE_SIZE;
-	if (map_x >= 0 && map_x < info->width && map_y >= 0 && map_y < info->height)
+	if (map_x >= 0 && map_x < WIDTH / TILE_SIZE && map_y >= 0 && map_y < HEIGHT)
 	{
 		if (info->copy_map[map_y][map_x] != '1')
 		{
