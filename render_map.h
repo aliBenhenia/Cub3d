@@ -1,9 +1,7 @@
 # ifndef RENDER_MAP_H
 # define RENDER_MAP_H
-# include <stdio.h>
-# include <unistd.h>
+
 # include <stdlib.h>
-# include <string.h>
 # include <mlx.h>
 # include <math.h>
 # include <limits.h>
@@ -101,7 +99,7 @@ double	norm_angl(double rayangle);
 int		get_player_y(char*map[]);
 int		get_player_x(char*map[]);
 int		get_height(char *map[]);
-int		getwidth(char *map[]);
+int		getwidth(char *map[], int idx);
 int		check_direction_up(t_data info, int i);
 int		check_direction_left(t_data info, int i);
 int		destroy_(int key, void *p);

@@ -10,7 +10,7 @@ int	get_player_x(char*map[])
 	while (y < get_height(map))
 	{
 		x = 0;
-		while (x < getwidth(map))
+		while (x < getwidth(map, y))
 		{
 			if (map[y][x] == 'N' ||map[y][x] == 'S' || map[y][x] == 'W' || map[y][x] == 'E')
 				return (x * TILE_SIZE);
@@ -31,7 +31,7 @@ int	get_player_y(char*map[])
 	while (y < get_height(map))
 	{
 		x = 0;
-		while (x < getwidth(map))
+		while (x < getwidth(map, y))
 		{
 			if (map[y][x] == 'N' ||map[y][x] == 'S' || map[y][x] == 'W' || map[y][x] == 'E')
 				return (y * TILE_SIZE);

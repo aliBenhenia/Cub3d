@@ -1,8 +1,18 @@
 #include "render_map.h"
 
-int	getwidth(char *map[])
+int	ft_strlen(char *s)
 {
-	return (strlen(map[0]));
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int	getwidth(char *map[], int idx)
+{
+	return (ft_strlen(map[idx]));
 }
 
 int	get_height(char *map[])
@@ -68,7 +78,7 @@ double handle_direction(t_data *info)
 	while (y < get_height(info->copy_map))
 	{
 		x = 0;
-		while (x < getwidth(info->copy_map))
+		while (x < getwidth(info->copy_map, y))
 		{
 			if (info->copy_map[y][x] == 'N' || info->copy_map[y][x] == 'S' ||info->copy_map[y][x] == 'W' || info->copy_map[y][x] == 'E')
 			{
@@ -87,7 +97,7 @@ void	init_data(t_data *info, char **map)
 	info->square_size = 30;
 	info->mlx_ptr = mlx_init();
 	info->height = get_height(map);
-	info->width = getwidth(map);
+	info->width = getwidth(map, 0);
 	info->win_ptr = mlx_new_window(info->mlx_ptr, WIDTH,  HEIGHT, "cube");
 	info->wimg = mlx_new_image(info->mlx_ptr, WIDTH,  HEIGHT);
 	info->wframe = mlx_get_data_addr(info->wimg, &tmp, &tmp,&tmp);
@@ -116,4 +126,5 @@ void	init_info_rays(t_data *info, double rayAngle, int i)
 	info->my_ray[i]._help.found_horz_wall_hit = 0;
 	info->my_ray[i]._help.wall_hit_x = 0;
 	info->my_ray[i]._help.wall_hit_y = 0;
+	info->my_ray[i].distance = 0;
 }
