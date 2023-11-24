@@ -2,6 +2,7 @@
 # define RENDER_MAP_H
 
 # include <stdlib.h>
+# include <stdio.h>
 # include <mlx.h>
 # include <math.h>
 # include <limits.h>

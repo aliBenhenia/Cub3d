@@ -23,7 +23,7 @@ void	handle_walk_(t_data *info)
 	}
 	map_x = end_x / TILE_SIZE;
 	map_y = end_y / TILE_SIZE;
-	if (map_x >= 0 && map_x < WIDTH / TILE_SIZE && map_y >= 0 && map_y < HEIGHT)
+	if (map_x >= 0 && map_x < info->width  && map_y >= 0 && map_y < info->height)
 	{
 		if (info->copy_map[map_y][map_x] != '1')
 		{
@@ -68,20 +68,19 @@ void	turn(t_data *info)
 
 void	handle_move(t_data *info, int keycode)
 {
-	// printf("%d\n", keycode);
 	if (keycode == 124)
 		info->_player.turn_direction = 1;
 	else if (keycode == 123)
 		info->_player.turn_direction = -1;
 	if (keycode == 13) // up
 	{
-		info->_player.is_lr = 0;
 		info->_player.walk_direction = 1;
+		info->_player.is_lr = 0;
 	}
 	if (keycode == 1) // down
 	{
-		info->_player.is_lr = 0;
 		info->_player.walk_direction = -1;
+		info->_player.is_lr = 0;
 	}
 	if (keycode == 0) // left
 	{

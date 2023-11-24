@@ -98,7 +98,7 @@ void	init_data(t_data *info, char **map)
 	info->mlx_ptr = mlx_init();
 	info->height = get_height(map);
 	info->width = getwidth(map, 0);
-	info->win_ptr = mlx_new_window(info->mlx_ptr, WIDTH,  HEIGHT, "cube");
+	info->win_ptr = mlx_new_window(info->mlx_ptr, WIDTH,  HEIGHT, "Cube3d");
 	info->wimg = mlx_new_image(info->mlx_ptr, WIDTH,  HEIGHT);
 	info->wframe = mlx_get_data_addr(info->wimg, &tmp, &tmp,&tmp);
 	info->_player.x = get_player_x(map);
@@ -126,5 +126,5 @@ void	init_info_rays(t_data *info, double rayAngle, int i)
 	info->my_ray[i]._help.found_horz_wall_hit = 0;
 	info->my_ray[i]._help.wall_hit_x = 0;
 	info->my_ray[i]._help.wall_hit_y = 0;
-	info->my_ray[i].distance = 0;
+	info->my_ray[i].distance = 10;
 }

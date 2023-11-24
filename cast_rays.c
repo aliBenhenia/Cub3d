@@ -29,7 +29,7 @@ void	helper_func(t_data *info, double horiz_hit_distance,
 void	cast_ray(t_data *info, double rayAngle, int i)
 {
 	double	horiz_hit_distance;
-	double	vertic_hit_distance;
+	double	vertic_hit_distance;int jj = 0;
 
 	init_info_rays(info, rayAngle, i);
 	handle_horizantal(info, i);
@@ -39,13 +39,19 @@ void	cast_ray(t_data *info, double rayAngle, int i)
 				info->my_ray[i]._help.wall_hit_x,
 				info->my_ray[i]._help.wall_hit_y);
 	else
+	{
+		// printf("hor : %d \n",i++);
 		horiz_hit_distance = INT_MAX;
+	}
 	if (info->my_ray[i]._help.found_vertical_wall_hit)
 		vertic_hit_distance = get_distance_(*info,
 				info->my_ray[i]._help.vert_wall_hit_x,
 				info->my_ray[i]._help.vert_wall_hit_y);
 	else
+	{
+		// printf("vert : %d \n",i++);
 		vertic_hit_distance = INT_MAX;
+	}
 	info->my_ray[i].wall_hit_x_ = get_wall_hit_x(horiz_hit_distance,
 			vertic_hit_distance, *info, i);
 	info->my_ray[i].wall_hit_y_ = get_wall_hit_y(horiz_hit_distance,
