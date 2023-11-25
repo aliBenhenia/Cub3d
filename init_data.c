@@ -64,7 +64,6 @@ double update_angle(char dir)
 		return (-(PI / 2)); // -90 angle
 	if (dir == 'E')
 		return (PI / 2); // 90 angle
-	printf("%C\n", dir);
 	return (0); // default
 }
 
@@ -90,6 +89,23 @@ double handle_direction(t_data *info)
 	}
 }
 
+int	get_max_width(char *map[])
+{
+	int	current_width;
+	int	max_width;
+	int	y;
+
+	y = 0;
+	while (y < get_height(map))
+	{
+		current_width = ft_strlen(map[y]);
+		if (current_width > max_width)
+			max_width = current_width;	
+		y++;
+	}
+	return (max_width);
+}
+
 void	init_data(t_data *info, char **map)
 {
 	int	tmp;
@@ -98,7 +114,8 @@ void	init_data(t_data *info, char **map)
 	info->mlx_ptr = mlx_init();
 	info->height = get_height(map);
 	// info->width = getwidth(map, 0);
-	info->width = 101;
+	info->width = get_max_width(map);
+	printf("%d\n", info->width);
 	info->win_ptr = mlx_new_window(info->mlx_ptr, WIDTH,  HEIGHT, "Cube3d");
 	info->win_ptr2 = mlx_new_window(info->mlx_ptr, info->width  * TILE_SIZE,  info->height * TILE_SIZE, "Cube2d");
 	info->wimg = mlx_new_image(info->mlx_ptr, WIDTH,  HEIGHT);
