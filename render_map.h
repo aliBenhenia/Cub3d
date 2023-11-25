@@ -68,6 +68,7 @@ typedef struct data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	void		*win_ptr2;
 	int			square_size; // unsed
 	int			height;
 	int			width;

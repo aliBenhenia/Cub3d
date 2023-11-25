@@ -58,7 +58,64 @@ void	cast_ray(t_data *info, double rayAngle, int i)
 			vertic_hit_distance, *info, i);
 	helper_func(info, horiz_hit_distance, vertic_hit_distance, i);
 }
+void rect(t_data *data, int map_width, int map_height) {
+   int x, y;
 
+    for (y = 0; y < map_height; y++) {
+        for (x = 0; x < map_width; x++) {
+            int color;
+
+            if (data->copy_map[y][x] == '1') {
+                // Wall color (Green)
+                color = 0x00FF00;
+            } else {
+                // Empty space color (White)
+                color = 0xFFFFFF;
+            }
+
+            // Draw filled square
+            int start_x = x * TILE_SIZE;
+            int start_y = y * TILE_SIZE;
+            for (int i = 0; i < TILE_SIZE; i++) {
+                for (int j = 0; j < TILE_SIZE; j++) {
+                    mlx_pixel_put(data->mlx_ptr, data->win_ptr2, start_x + i, start_y + j, color);
+                }
+            }
+        }
+    }
+}
+
+void mlx_pixel_put_line(t_data *data, int x, int y, int color) {
+    mlx_pixel_put(data->mlx_ptr, data->win_ptr2, x, y, color);
+}
+
+void drawline(t_data *data, int x0, int y0, int x1, int y1, int color) {
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx = (x0 < x1) ? 1 : -1;
+    int sy = (y0 < y1) ? 1 : -1;
+    int err = dx - dy;
+
+    while (1) {
+        mlx_pixel_put_line(data, x0, y0, color);
+
+        if (x0 == x1 && y0 == y1) {
+            break;
+        }
+
+        int e2 = 2 * err;
+
+        if (e2 > -dy) {
+            err -= dy;
+            x0 += sx;
+        }
+
+        if (e2 < dx) {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
 void	cast_rays(t_data *info)
 {
 	double	ray_angle;
@@ -73,4 +130,12 @@ void	cast_rays(t_data *info)
 		i++;
 		ray_angle += FOV / NUM_RAYS;
 	}
+	rect(info, info->width, info->height);
+    i = 0;
+    while (i < NUM_RAYS)
+	{
+		drawline(info, info->_player.x, info->_player.y, info->my_ray[i].wall_hit_x_, info->my_ray[i].wall_hit_y_, 0xFF0000);
+		i++;
+	}
+	
 }
