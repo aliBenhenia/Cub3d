@@ -33,8 +33,8 @@ void	check_wall_hit_vert(t_data *info, double x_step, int i)
 
 	next_vertical_x = info->my_ray[i]._help.x_intercept;
 	next_vertical_y = info->my_ray[i]._help.y_intercept;
-	while (next_vertical_x >= 0 && next_vertical_x <= WIDTH && next_vertical_y
-		>= 0 && next_vertical_y <= HEIGHT)
+	while (next_vertical_x >= 0 && next_vertical_x <= info->width * TILE_SIZE && next_vertical_y
+		>= 0 && next_vertical_y <= info->height * TILE_SIZE)
 	{
 		vertical_x = next_vertical_x + check_direction_left(*info, i);
 		if (check_wall_px(*info, vertical_x, next_vertical_y))

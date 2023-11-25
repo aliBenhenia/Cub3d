@@ -97,7 +97,8 @@ void	init_data(t_data *info, char **map)
 	info->square_size = 30;
 	info->mlx_ptr = mlx_init();
 	info->height = get_height(map);
-	info->width = getwidth(map, 0);
+	// info->width = getwidth(map, 0);
+	info->width = 101;
 	info->win_ptr = mlx_new_window(info->mlx_ptr, WIDTH,  HEIGHT, "Cube3d");
 	info->win_ptr2 = mlx_new_window(info->mlx_ptr, info->width  * TILE_SIZE,  info->height * TILE_SIZE, "Cube2d");
 	info->wimg = mlx_new_image(info->mlx_ptr, WIDTH,  HEIGHT);
