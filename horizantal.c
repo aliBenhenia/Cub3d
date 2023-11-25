@@ -8,8 +8,8 @@ void	check_wall_hit_horz(t_data *info, double x_step, int i)
 
 	next_horz_x = info->my_ray[i]._help.x_intercept;
 	next_horz_y = info->my_ray[i]._help.y_intercept;
-	while (next_horz_x >= 0 && next_horz_x <= WIDTH
-		&& next_horz_y >= 0 && next_horz_y <= HEIGHT)
+	while (next_horz_x >= 0 && next_horz_x <= info->width  * TILE_SIZE
+		&& next_horz_y >= 0 && next_horz_y <= info->height * TILE_SIZE)
 	{
 		y_to_check = next_horz_y + check_direction_up(*info, i);
 		if (check_wall_px(*info, next_horz_x, y_to_check))

@@ -7,7 +7,7 @@ int	check_wall_px(t_data info, double x, double y)
 
 	map_x = x / TILE_SIZE;
 	map_y = y / TILE_SIZE;
-	if (x < 0 || y < 0 || x >= WIDTH || y >= info.height * 30)
+	if (x < 0 || y < 0 || x >= info.width * TILE_SIZE || y >= info.height * 30)
 		return (1);
 	if (info.copy_map[map_y][map_x] == '1')
 		return (1);
