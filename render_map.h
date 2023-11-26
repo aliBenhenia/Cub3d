@@ -16,7 +16,7 @@
 # define WALL_STRIPE 1
 # define NUM_RAYS  WIDTH
 # define MINI_MAP_SCALE 0.5
-
+# define MOVE_SPEED 10
 // direction
 #define NORTH "N"
 #define SOUTH "S"

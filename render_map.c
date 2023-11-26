@@ -92,12 +92,11 @@ int	main(void)
 	int		i;
 
 	i = 2;
-	map1 = (char **)malloc(50 * sizeof(char *));
+	map1 = (char **)malloc(40 * sizeof(char *));
 	map1[0] = strdup("11111111111111111");
     map1[1] = strdup("1000000000000000N0000000011111111");
-	while (i < 50)
+	while (i < 40)
 		 map1[i++] = strdup("10101");
-	
     map1[i] = NULL;
 	render_map(map1);
 	return (0);

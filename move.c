@@ -10,16 +10,16 @@ void	handle_walk_(t_data *info)
 	if (info->_player.is_lr)
 	{
 		end_x = (*info)._player.x + cos((*info)._player.rotation_angle + (PI / 2))
-			* 10 * info->_player.walk_direction;
+			* MOVE_SPEED * info->_player.walk_direction;
 		end_y = (*info)._player.y + sin((*info)._player.rotation_angle + (PI / 2))
-			* 10 * info->_player.walk_direction;
+			* MOVE_SPEED * info->_player.walk_direction;
 	}
 	else
 	{
 		end_x = (*info)._player.x + cos((*info)._player.rotation_angle)
-			* 10 * info->_player.walk_direction;
+			* MOVE_SPEED * info->_player.walk_direction;
 		end_y = (*info)._player.y + sin((*info)._player.rotation_angle)
-			* 10 * info->_player.walk_direction;
+			* MOVE_SPEED * info->_player.walk_direction;
 	}
 	map_x = end_x / TILE_SIZE;
 	map_y = end_y / TILE_SIZE;
