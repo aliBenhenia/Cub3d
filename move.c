@@ -9,9 +9,9 @@ void	handle_walk_(t_data *info)
 
 	if (info->_player.is_lr)
 	{
-		end_x = (*info)._player.x + cos((*info)._player.rotation_angle + (PI / 2))
+		end_x = (*info)._player.x + cos((*info)._player.rotation_angle + (DEG90))
 			* MOVE_SPEED * info->_player.walk_direction;
-		end_y = (*info)._player.y + sin((*info)._player.rotation_angle + (PI / 2))
+		end_y = (*info)._player.y + sin((*info)._player.rotation_angle + (DEG90))
 			* MOVE_SPEED * info->_player.walk_direction;
 	}
 	else
@@ -96,6 +96,8 @@ void	handle_move(t_data *info, int keycode)
 	}
 	if (keycode == 53)
 		exit(1);
+	handle_walk_(info);
+	turn(info);
 }
 
 int	move(int keycode, t_data *info)
