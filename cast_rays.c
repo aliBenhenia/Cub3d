@@ -116,6 +116,7 @@ void drawline(t_data *data, int x0, int y0, int x1, int y1, int color) {
         }
     }
 }
+
 void	cast_rays(t_data *info)
 {
 	double	ray_angle;
@@ -130,12 +131,12 @@ void	cast_rays(t_data *info)
 		i++;
 		ray_angle += FOV / NUM_RAYS;
 	}
-	// rect(info, info->width, info->height);
-    // i = 0;
-    // while (i < NUM_RAYS)
-	// {
-	// 	drawline(info, info->_player.x, info->_player.y, info->my_ray[i].wall_hit_x_, info->my_ray[i].wall_hit_y_, 0xFF0000);
-	// 	i++;
-	// }
+	rect(info, info->width, info->height);
+    i = 0;
+    while (i < NUM_RAYS)
+	{
+		drawline(info, info->_player.x, info->_player.y, info->my_ray[i].wall_hit_x_, info->my_ray[i].wall_hit_y_, 0xFF0000);
+		i++;
+	}
 	
 }

@@ -38,7 +38,7 @@ void	handle_horizantal(t_data *info, int i)
 	y_step = 0;
 	y_intercept = floor(info->_player.y / TILE_SIZE) * TILE_SIZE;
 	if (info->my_ray[i].is_ray_facing_down)
-		y_intercept += TILE_SIZE;
+		y_intercept += TILE_SIZE; 
 	x_intercept = info->_player.x + (y_intercept - info->_player.y)
 		/ tan(info->my_ray[i].ray_angle);
 	y_step = TILE_SIZE;

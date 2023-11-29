@@ -1,6 +1,42 @@
 #include "render_map.h"
 
-void	handle_walk_(t_data *info)
+static int is_wall(t_data *info, double x, double y) {
+    int map_x = (int)(x / TILE_SIZE);
+    int map_y = (int)(y / TILE_SIZE);
+
+    if (map_x >= 0 && map_x < info->map_width && map_y >= 0 && map_y < info->map_height)
+	{
+        return (info->pars->map[map_y][map_x] == '1');
+    }
+
+    // Out of bounds, consider it a wall
+    return 1;
+}
+
+static int has_wall_in_path(t_data *info, double x1, double y1, double x2, double y2) {
+    double dx = x2 - x1;
+    double dy = y2 - y1;
+    double distance = sqrt(dx * dx + dy * dy);
+    double step = 0.1; // Adjust this value based on your needs
+
+    double t = 0;
+    while (t <= distance)
+	{
+        double x = x1 + t * (x2 - x1) / distance;
+        double y = y1 + t * (y2 - y1) / distance;
+
+        if (is_wall(info, x, y))
+		{
+            return 1; // Collision detected
+        }
+        t += step;
+    }
+	return (0); // no collision
+}
+
+
+//this function is used in render_() :static 
+static void	handle_walk_(t_data *info)
 {
 	double	end_x;
 	double	end_y;
@@ -9,29 +45,23 @@ void	handle_walk_(t_data *info)
 
 	if (info->_player.is_lr)
 	{
-		end_x = (*info)._player.x + cos((*info)._player.rotation_angle + (DEG90))
-			* MOVE_SPEED * info->_player.walk_direction;
-		end_y = (*info)._player.y + sin((*info)._player.rotation_angle + (DEG90))
-			* MOVE_SPEED * info->_player.walk_direction;
+		end_x = info->_player.x + cos(info->_player.rotation_angle + (M_PI / 2)) * info->_player.walk_direction;
+		end_y = info->_player.y + sin(info->_player.rotation_angle + (M_PI / 2)) * info->_player.walk_direction;
 	}
 	else
 	{
-		end_x = (*info)._player.x + cos((*info)._player.rotation_angle)
-			* MOVE_SPEED * info->_player.walk_direction;
-		end_y = (*info)._player.y + sin((*info)._player.rotation_angle)
-			* MOVE_SPEED * info->_player.walk_direction;
+		end_x = info->_player.x + cos(info->_player.rotation_angle) * info->_player.walk_direction;
+		end_y = info->_player.y + sin(info->_player.rotation_angle) * info->_player.walk_direction;
 	}
 	map_x = end_x / TILE_SIZE;
 	map_y = end_y / TILE_SIZE;
-	if (map_x >= 0 && map_x < info->width  && map_y >= 0 && map_y < info->height)
+	if (!has_wall_in_path(info, info->_player.x, info->_player.y, end_x, end_y))
 	{
-		if (info->copy_map[map_y][map_x] != '1')
-		{
-			info->_player.x = end_x;
-			info->_player.y = end_y;
-		}
+		info->_player.x = end_x;
+		info->_player.y = end_y;
 	}
 }
+
 
 static void	handle_walk_back(t_data *info)
 {
