@@ -17,7 +17,7 @@ double	norm_angl(double rayangle)
 int	check_direction_left(t_data info, int i)
 {
 	if (info.my_ray[i].is_ray_facing_left)
-		return (-2);
+		return (-1);
 	return (0);
 }
 
